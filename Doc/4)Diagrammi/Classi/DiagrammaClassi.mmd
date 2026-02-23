@@ -1,0 +1,945 @@
+classDiagram
+direction TB
+	namespace Main {
+        class App {
+	        +main(String[] args) void$
+        }
+
+	}
+	namespace Model {
+        class Utente {
+	        #int idUtente
+	        #String username
+	        #String password
+	        #String nome
+	        #String cognome
+	        +Utente(int, String, String, String, String)
+	        +getIdUtente() int
+	        +getUsername() String
+	        +getPassword() String
+	        +getNome() String
+	        +getCognome() String
+        }
+
+        class Cliente {
+	        +Cliente(int, String, String, String, String)
+	        +toString() String
+        }
+
+        class Amministratore {
+	        +Amministratore(int, String, String, String, String)
+        }
+
+        class Squadra {
+	        -int idSquadra
+	        -String nomeSquadra
+	        -Cliente capitano
+	        -List~Cliente~ membri
+	        -int idCapitano
+	        +Squadra()
+	        +Squadra(int, String, Cliente, int)
+	        +getIdSquadra() int
+	        +setIdSquadra(int) void
+	        +getNomeSquadra() String
+	        +setNomeSquadra(String) void
+	        +getCapitano() Cliente
+	        +getMembri() List~Cliente~
+	        +setMembri(List~Cliente~) void
+	        +getIdCapitano() int
+			+toString() String
+        }
+
+        class ImpiantoSportivo {
+	        -int idCampo
+	        -String nome
+	        -String tipoSport
+	        +ImpiantoSportivo(int, String, String)
+	        +getIdCampo() int
+	        +getNome() String
+	        +getTipoSport() String
+        }
+
+        class FasciaOraria {
+	        -int idFascia
+	        -DayOfWeek giornoSettimana
+	        -LocalTime oraInizio
+	        -LocalTime oraFine
+	        -double prezzoBase
+	        +FasciaOraria(int, DayOfWeek, LocalTime, LocalTime, double)
+	        +getIdFascia() int
+	        +getGiornoSettimana() DayOfWeek
+	        +getOraInizio() LocalTime
+	        +getOraFine() LocalTime
+	        +getPrezzoBase() double
+        }
+
+        class Prenotazione {
+	        -int idPrenotazione
+	        -LocalDate data
+	        -String nomeSquadraA
+	        -String nomeSquadraB
+	        -boolean pagamentoConfermato
+	        -Utente creatore
+	        -ImpiantoSportivo impianto
+	        -FasciaOraria fasciaOraria
+	        -List~Cliente~ giocatori
+	        -int fkCampo
+	        -int fkFascia
+	        +Prenotazione(int, LocalDate, Utente, ImpiantoSportivo, FasciaOraria)
+	        +getIdPrenotazione() int
+	        +setIdPrenotazione(int) void
+	        +getData() LocalDate
+	        +setData(LocalDate) void
+	        +getNomeSquadraA() String
+	        +setNomeSquadraA(String) void
+	        +getNomeSquadraB() String
+	        +setNomeSquadraB(String) void
+	        +isPagamentoConfermato() boolean
+	        +setPagamentoConfermato(boolean) void
+	        +getCreatore() Utente
+	        +setCreatore(Utente) void
+	        +getImpianto() ImpiantoSportivo
+	        +setImpianto(ImpiantoSportivo) void
+	        +getFasciaOraria() FasciaOraria
+	        +setFasciaOraria(FasciaOraria) void
+	        +getGiocatori() List~Cliente~
+	        +setGiocatori(List~Cliente~) void
+	        +getFkCampo() int
+	        +setFkCampo(int) void
+	        +getFkFascia() int
+	        +setFkFascia(int) void
+        }
+
+        class Torneo {
+	        -int idTorneo
+	        -String nome
+	        -LocalDate dataInizio
+	        -StatoTorneo statoCorrente
+	        -Squadra vincitore
+	        -List~Squadra~ squadrePartecipanti
+	        -List~Partita~ partite
+	        +Torneo(int, String, LocalDate)
+	        +generaCalendario() void
+	        +inserisciRisultato() void
+	        +concludiTorneo() void
+	        +getStato() String
+	        +setStato(String) void
+	        +setStatoObj(StatoTorneo) void
+	        +getIdTorneo() int
+	        +setIdTorneo(int) void
+	        +getNome() String
+	        +getDataInizio() LocalDate
+	        +getSquadrePartecipanti() List~Squadra~
+	        +setSquadrePartecipanti(List~Squadra~) void
+	        +getPartite() List~Partita~
+	        +setPartite(List~Partita~) void
+	        +getVincitore() Squadra
+	        +setVincitore(Squadra) void
+	        +toString() String
+        }
+
+        class Partita {
+	        -int idPartita
+	        -int idTorneo
+	        -Squadra squadraCasa
+	        -Squadra squadraOspite
+	        -Prenotazione prenotazione
+	        -Integer risultatoCasa
+	        -Integer risultatoOspite
+	        -int turno
+	        -Partita partitaSuccessiva
+	        -String slotVincitoreSuccessivo
+	        +Partita(int, int)
+	        +isProntaPerPrenotazione() boolean
+	        +getTurnoString() String
+	        +getIdPartita() int
+	        +setIdPartita(int) void
+	        +getIdTorneo() int
+	        +getSquadraCasa() Squadra
+	        +setSquadraCasa(Squadra) void
+	        +getSquadraOspite() Squadra
+	        +setSquadraOspite(Squadra) void
+	        +getPrenotazione() Prenotazione
+	        +setPrenotazione(Prenotazione) void
+	        +getRisultatoCasa() Integer
+	        +setRisultatoCasa(Integer) void
+	        +getRisultatoOspite() Integer
+	        +setRisultatoOspite(Integer) void
+	        +getTurno() int
+	        +setTurno(int) void
+	        +getPartitaSuccessiva() Partita
+	        +setPartitaSuccessiva(Partita) void
+	        +getSlotVincitoreSuccessivo() String
+	        +setSlotVincitoreSuccessivo(String) void
+        }
+
+	}
+	namespace Exceptions {
+        class Exception {
+        }
+
+        class RuntimeException {
+        }
+
+        class RegolaDiBusinessException {
+	        +RegolaDiBusinessException(String)
+        }
+
+        class DataAccessException {
+	        +DataAccessException(String, Throwable)
+        }
+
+        class DatiConflittoException {
+	        +DatiConflittoException(String)
+        }
+
+        class OperazioneFallitaException {
+	        +OperazioneFallitaException(String)
+	        +OperazioneFallitaException(String, Throwable)
+        }
+
+        class PermessoNegatoException {
+	        +PermessoNegatoException()
+	        +PermessoNegatoException(String)
+        }
+
+        class RisorsaNonTrovataException {
+	        +RisorsaNonTrovataException(String)
+        }
+
+        class SlotNonTrovatoException {
+	        +SlotNonTrovatoException()
+	        +SlotNonTrovatoException(String)
+        }
+
+        class UsernameGiaInUsoException {
+	        +UsernameGiaInUsoException(String)
+        }
+
+	}
+	namespace StatePattern {
+        class StatoTorneo {
+	        +getNomeStato() String
+	        +generaCalendario(Torneo) void
+	        +inserisciRisultato(Torneo) void
+	        +concludiTorneo(Torneo) void
+        }
+
+        class StatoBozza {
+	        +getNomeStato() String
+	        +generaCalendario(Torneo) void
+	        +inserisciRisultato(Torneo) void
+	        +concludiTorneo(Torneo) void
+        }
+
+        class StatoAttivo {
+	        +getNomeStato() String
+	        +generaCalendario(Torneo) void
+	        +inserisciRisultato(Torneo) void
+	        +concludiTorneo(Torneo) void
+        }
+
+        class StatoConcluso {
+	        +getNomeStato() String
+	        +generaCalendario(Torneo) void
+	        +inserisciRisultato(Torneo) void
+	        +concludiTorneo(Torneo) void
+        }
+
+	}
+	namespace StrategyPattern {
+        class PricingStrategy {
+	        +calcolaPrezzo(Prenotazione) double
+        }
+
+        class PriceCalculator {
+	        -PricingStrategy strategy
+	        +calcolaPrezzoFinale(Prenotazione) double
+        }
+
+        class StandardPricingStrategy {
+	        +calcolaPrezzo(Prenotazione) double
+        }
+
+        class WeekendPricingStrategy {
+	        -double MAGGIORAZIONE_WEEKEND$
+	        +calcolaPrezzo(Prenotazione) double
+        }
+
+	}
+	namespace ObserverPattern {
+        class Observer {
+	        ~update() void
+        }
+
+        class Subject {
+	        ~addObserver(Observer) void
+	        ~removeObserver(Observer) void
+	        ~notifyObservers() void
+        }
+
+	}
+	namespace Factory {
+        class UtenteFactory {
+	        +creaUtente(String, int, String, String, String, String) Utente
+        }
+
+        class DaoFactory {
+	        -DaoFactory instance$
+	        -DaoFactory()
+	        +getInstance() DaoFactory$
+	        +getTorneoDAO() TorneoDAO
+	        +getPrenotazioneDAO() PrenotazioneDAO
+	        +getUtenteDAO() UtenteDAO
+	        +getSquadraDAO() SquadraDAO
+	        +getPartitaDAO() PartitaDAO
+	        +getImpiantoDAO() ImpiantoSportivoDAO
+	        +getFasciaOrariaDAO() FasciaOrariaDAO
+	        +getImpiantiFasceDAO() ImpiantiFasceDAO
+        }
+
+	}
+	namespace UI_View {
+        class MainFrame {
+	        -CardLayout cardLayout
+	        -JPanel mainPanel
+	        -LoginView loginView
+	        -RegistrazioneView registrazioneView
+	        -ClienteView clienteView
+	        -AdminView adminView
+	        +MainFrame()
+	        +showLoginView() void
+	        +showRegistrazioneView() void
+	        +showClienteView() void
+	        +showAdminView() void
+	        +getLoginView() LoginView
+	        +getRegistrazioneView() RegistrazioneView
+	        +getClienteView() ClienteView
+	        +getAdminView() AdminView
+			+mostra(String) String
+			+mostraErrore(String) void
+	        +mostraSuccesso(String) void
+			+mostraConferma(String) int
+        }
+
+        class LoginView {
+	        -JTextField usernameField
+	        -JPasswordField passwordField
+	        -JButton loginButton
+	        -JButton registratiButton
+	        +LoginView()
+	        +getUsername() String
+	        +getPassword() char[]
+	        +addLoginListener(ActionListener) void
+	        +addRegistratiListener(ActionListener) void
+			+clearFields() void
+        }
+
+        class RegistrazioneView {
+	        -JTextField nomeField
+	        -JTextField cognomeField
+	        -JTextField usernameField
+	        -JPasswordField passwordField
+	        -JPasswordField confermaPasswordField
+	        -JButton registratiButton
+	        -JButton tornaAlLoginButton
+	        +RegistrazioneView()
+	        +getNome() String
+	        +getCognome() String
+	        +getUsername() String
+	        +getPassword() char[]
+	        +getConfermaPassword() char[]
+	        +addRegistrazioneListener(ActionListener) void
+	        +addTornaAlLoginListener(ActionListener) void
+	        +clearFields() void
+        }
+
+        class ClienteView {
+	        -JLabel welcomeLabel
+	        -JTable calendarioTable
+	        -JButton prenotaButton
+	        -JButton logoutButton
+	        -JButton storicoButton
+	        -JLabel dataLabel
+	        -JButton giornoPrecedenteButton
+	        -JButton giornoSuccessivoButton
+	        -JButton gestisciSquadreButton
+	        -JButton visualizzaTorneiButton
+	        +ClienteView()
+	        +setWelcomeMessage(String) void
+	        +getCalendarioTable() JTable
+	        +setDataLabel(String) void
+	        +setGiornoPrecedenteButtonEnabled(boolean) void
+	        +addLogoutListener(ActionListener) void
+	        +addPrenotaListener(ActionListener) void
+	        +addStoricoListener(ActionListener) void
+	        +addGiornoPrecedenteListener(ActionListener) void
+	        +addGiornoSuccessivoListener(ActionListener) void
+	        +addGestisciSquadreListener(ActionListener) void
+	        +addVisualizzaTorneiListener(ActionListener) void
+        }
+
+        class AdminView {
+	        -JLabel welcomeLabel
+	        -JButton aggiungiImpiantoButton
+	        -JButton visualizzaPrenotazioniButton
+	        -JButton gestisciTorneiButton
+	        -JButton logoutButton
+	        -JButton btnGestioneSquadre
+	        +AdminView()
+	        +setWelcomeMessage(String) void
+	        +addAggiungiImpiantoListener(ActionListener) void
+	        +addVisualizzaPrenotazioniListener(ActionListener) void
+	        +addGestisciTorneiListener(ActionListener) void
+	        +addLogoutListener(ActionListener) void
+	        +addGestioneSquadreListener(ActionListener) void
+	        +getFrame() Frame
+        }
+
+        class AggiungiImpiantoDialog {
+	        -JTextField nomeField
+	        -JButton confermaButton
+	        -JButton annullaButton
+	        -boolean confermato
+	        -List~JCheckBox~ fasceCheckBoxes
+	        -List~FasciaOraria~ fasceDisponibili
+	        +AggiungiImpiantoDialog(Frame, List~FasciaOraria~)
+	        +getNomeImpianto() String
+	        +isConfermato() boolean
+	        +getSelectedFasce() List~FasciaOraria~
+        }
+
+        class TuttePrenotazioniDialog {
+	        +TuttePrenotazioniDialog(Frame, List~Prenotazione~)
+        }
+
+        class PrenotazioneDialog {
+	        -JComboBox~Squadra~ squadraCasaBox
+	        -JComboBox~Squadra~ squadraOspiteBox
+	        -JButton confermaButton
+	        -JButton annullaButton
+	        -JLabel prezzoLabel
+	        -boolean confermato
+	        +PrenotazioneDialog(Frame, double, List~Squadra~)
+	        +isConfermato() boolean
+	        +getSquadraCasa() Squadra
+	        +getSquadraOspite() Squadra
+        }
+
+        class StoricoPrenotazioniDialog {
+	        +StoricoPrenotazioniDialog(Frame, List~Prenotazione~)
+        }
+
+        class GestioneSquadreAdminDialog {
+	        -JTable table
+	        -DefaultTableModel tableModel
+	        -AdminController controller
+	        +GestioneSquadreAdminDialog(Frame, List~Squadra~, AdminController)
+        }
+
+        class GestioneSquadreDialog {
+	        -JComboBox~Squadra~ squadreComboBox
+	        -JList~Cliente~ membriList
+	        -DefaultListModel~Cliente~ membriListModel
+	        -JButton creaSquadraButton
+	        -JButton aggiungiMembroButton
+	        -JButton rimuoviMembroButton
+	        -JTextField nuovoMembroField
+	        +GestioneSquadreDialog(Frame, List~Squadra~)
+	        +getSquadreComboBox() JComboBox~Squadra~
+	        +getMembriList() JList~Cliente~
+	        +getNuovoMembroUsername() String
+	        +clearNuovoMembroField() void
+	        +addCreaSquadraListener(ActionListener) void
+	        +addAggiungiMembroListener(ActionListener) void
+	        +addRimuoviMembroListener(ActionListener) void
+	        +refreshMembri(List~Cliente~) void
+	        +setAzioniCapitanoEnabled(boolean) void
+			+mostraErrore(String) void
+	        +mostraSuccesso(String) void
+			+inputMessaggio(String) String
+        }
+
+        class CreaTorneoDialog {
+	        -JTextField nomeTorneoField
+	        -JList~Squadra~ squadreList
+	        -DefaultListModel~Squadra~ squadreListModel
+	        -JButton confermaButton
+	        -JButton annullaButton
+	        -boolean confermato
+	        +CreaTorneoDialog(Frame, List~Squadra~)
+	        +isConfermato() boolean
+	        +getNomeTorneo() String
+	        +getSquadreSelezionate() List~Squadra~
+        }
+
+        class GestioneTorneiDialog {
+	        -JList~Torneo~ torneiList
+	        -DefaultListModel~Torneo~ torneiListModel
+	        -JButton creaTorneoButton
+	        -JButton generaCalendarioButton
+	        -JButton visualizzaPartiteButton
+	        -JButton eliminaTorneoButton
+	        +GestioneTorneiDialog(Frame, List~Torneo~)
+	        +aggiornaLista(List~Torneo~) void
+	        +getTorneoSelezionato() Torneo
+	        +addCreaTorneoListener(ActionListener) void
+	        +addGeneraCalendarioListener(ActionListener) void
+	        +addVisualizzaPartiteListener(ActionListener) void
+	        +addEliminaTorneoListener(ActionListener) void
+			+mostraErrore(String) void
+	        +mostraSuccesso(String) void
+			+mostraConferma(String) int
+			+mostraErroreNessuno(String) void
+			+mostraAttenzione(String) void
+		}
+
+        class VisualizzaTorneoDialog {
+	        -JTable partiteTable
+	        -DefaultTableModel tableModel
+	        -JButton inserisciRisultatoButton
+	        -JButton chiudiButton
+	        +VisualizzaTorneoDialog(Frame, List~Partita~, Torneo)
+	        +aggiornaDati(List~Partita~) void
+	        +getRigaPartitaSelezionata() int
+	        +addInserisciRisultatoListener(ActionListener) void
+	        +abilitaModalitaSolaLettura() void
+	        -getStringaTurno(int) String
+			+mostraErrore(String) void
+	        +mostraSuccesso(String) void
+			+inputMessaggio(String) String
+			+mostraGoal(String) String
+        }
+
+        class SelezionaTorneoDialog {
+	        -JComboBox~Torneo~ torneiBox
+	        -JButton confermaButton
+	        -boolean confermato
+	        +SelezionaTorneoDialog(Frame, List~Torneo~)
+	        +isConfermato() boolean
+	        +getTorneoSelezionato() Torneo
+        }
+
+	}
+	namespace Controllers {
+        class AppController {
+	        -MainFrame mainFrame
+	        -UserFacade userFacade
+	        -TorneoFacade torneoFacade
+	        -PrenotazioneFacade prenotazioneFacade
+	        -SquadraFacade squadraFacade
+	        -SquadraManager squadraManager
+	        -TorneoManager torneoManager
+	        -PrenotazioneManager prenotazioneManager
+	        -UserManager userManager
+	        -ClienteController clienteController
+	        -AdminController adminController
+	        -Utente utenteCorrente
+	        +AppController(MainFrame)
+	        -initController() void
+	        -eseguiLogin() void
+	        -eseguiRegistrazione() void
+	        +eseguiLogout() void
+	        +getUtenteCorrente() Utente
+	        +getMainFrame() MainFrame
+	        +getUserFacade() UserFacade
+	        +getTorneoFacade() TorneoFacade
+	        +getPrenotazioneFacade() PrenotazioneFacade
+	        +getSquadraFacade() SquadraFacade
+	        +getSquadraManager() SquadraManager
+	        +getTorneoManager() TorneoManager
+	        +getPrenotazioneManager() PrenotazioneManager
+	        +getUserManager() UserManager
+        }
+
+        class AdminController {
+	        -AppController appController
+	        -MainFrame mainFrame
+	        -AdminView view
+	        -TorneoController torneoController
+	        -PrenotazioneFacade prenotazioneFacade
+	        +AdminController(AppController, MainFrame, AdminView)
+	        -initListeners() void
+	        -mostraDialogAggiungiImpianto() void
+	        +onLogin() void
+	        -mostraTutteLePrenotazioni() void
+	        -rimuoviSquadra(int) void
+	        -mostraGestioneSquadre() void
+        }
+
+        class ClienteController {
+	        -AppController appController
+	        -MainFrame mainFrame
+	        -ClienteView view
+	        -PrenotazioneFacade prenotazioneFacade
+	        -TorneoFacade torneoFacade
+	        -SquadraController squadraController
+	        -LocalDate dataVisualizzata
+	        -List~ImpiantoSportivo~ campiCache
+	        -List~FasciaOraria~ fasceCache
+	        +ClienteController(AppController, MainFrame, ClienteView)
+	        -initListeners() void
+	        -onLogin() void
+	        +aggiornaCalendarioView() void
+	        -mostraStorico() void
+	        -eseguiPrenotazione() void
+	        -visualizzaMieiTornei() void
+        }
+
+        class TorneoController {
+	        -AppController app
+	        -TorneoFacade facade
+	        -GestioneTorneiDialog gestioneDialog
+	        -VisualizzaTorneoDialog visualizzaDialog
+	        +TorneoController(AppController)
+	        +mostraGestioneTornei() void
+	        -gestisciCreazioneTorneo() void
+	        -generaCalendario() void
+	        -mostraVisualizzaTorneoDialog() void
+	        -eliminaTorneoSelezionato() void
+	        -inserisciRisultato(List~Partita~) void
+        }
+
+        class SquadraController {
+	        -AppController app
+	        -SquadraFacade squadraFacade
+	        -PrenotazioneFacade prenotazioneFacade
+	        -GestioneSquadreDialog dialog
+	        +SquadraController(AppController)
+	        +mostraGestioneSquadre() void
+	        -creaSquadra() void
+	        -aggiungiMembro() void
+	        -rimuoviMembro() void
+        }
+
+	}
+	namespace Facades {
+        class UserFacade {
+	        -UserManager userManager
+	        +UserFacade(UserManager)
+	        +login(String, String) Utente
+	        +registraCliente(String, String, String, String) void
+        }
+
+        class PrenotazioneFacade {
+	        -PrenotazioneManager prenotazioneManager
+	        -PriceCalculator priceCalculator
+	        +PrenotazioneFacade(PrenotazioneManager)
+	        +getSquadreDiUtente(int) List~Squadra~
+	        +aggiungiImpianto(String, List~FasciaOraria~) void
+	        +getTuttiImpianti() List~ImpiantoSportivo~
+	        +getTutteFasceOrarie() List~FasciaOraria~
+	        +getPrenotazioniGiorno(LocalDate) List~Prenotazione~
+	        +getMappaDisponibilita() Map~Integer,List~Integer~~
+	        +calcolaPrezzo(Prenotazione) double
+	        +getTutteSquadre() List~Squadra~
+	        +getMembriSquadra(int) List~Cliente~
+	        +confermaPrenotazione(Prenotazione, Squadra, Squadra, Utente) void
+	        +getStoricoUtente(int) List~Prenotazione~
+	        +getTutteLePrenotazioni() List~Prenotazione~
+            +addObserver(Observer) void
+        }
+
+        class TorneoFacade {
+	        -TorneoManager torneoManager
+	        +TorneoFacade(TorneoManager)
+	        +getTuttiITornei() List~Torneo~
+	        +getTutteLeSquadre() List~Squadra~
+	        +creaTorneo(String, List~Squadra~, int) void
+	        +generaCalendario(Torneo, Amministratore) void
+	        +getPartiteTorneo(int) List~Partita~
+	        +inserisciRisultato(int, int, int, Amministratore) void
+	        +prenotaPartitaManuale(Partita, LocalDate, Amministratore) void
+	        +eliminaTorneo(int) void
+	        +getTorneiDiUtente(int) List~Torneo~
+	        +addObserver(Observer) void
+	        +removeObserver(Observer) void
+        }
+
+        class SquadraFacade {
+	        -SquadraManager squadraManager
+	        +SquadraFacade(SquadraManager)
+	        +creaSquadra(String, Cliente) void
+	        +aggiungiMembro(Squadra, String, Cliente) void
+	        +rimuoviMembro(Squadra, Cliente, Cliente) void
+	        +rimuoviSquadraAdmin(int) void
+        }
+
+	}
+	namespace Managers {
+        class UserManager {
+	        -UtenteDAO utenteDAO
+	        -UtenteFactory utenteFactory
+	        +UserManager(DaoFactory)
+	        +login(String, String) Utente
+	        +registraCliente(String, String, String, String) void
+        }
+
+        class PrenotazioneManager {
+	        -List~Observer~ observers
+	        -PrenotazioneDAO prenotazioneDAO
+	        -SquadraDAO squadraDAO
+	        -ImpiantoSportivoDAO impiantoDAO
+	        -FasciaOrariaDAO fasciaOrariaDAO
+	        -ImpiantiFasceDAO impiantiFasceDAO
+	        +PrenotazioneManager(DaoFactory)
+	        +addObserver(Observer) void
+	        +removeObserver(Observer) void
+	        +notifyObservers() void
+	        +confermaPrenotazione(Prenotazione, Squadra, Squadra, Utente) void
+	        +aggiungiImpianto(String, List~FasciaOraria~) void
+	        +cancellaPrenotazioneDiSquadra(String): void
+			+getSquadreDiUtente(int) List~Squadra~
+			+getMembriSquadra(int) List~Cliente~
+			+getTuttiImpianti() List~ImpiantoSportivo~
+			+getTutteFasceOrarie() List~FasciaOraria~
+	        +getPrenotazioniGiorno(LocalDate) List~Prenotazione~
+	        +getMappaDisponibilita() Map~Integer, List~Integer~~
+	        +getTutteSquadre() List~Squadra~
+	        +getStoricoUtente(int) List~Prenotazione~
+			+getTutteLePrenotazioni() List~Prenotazione~
+        }
+
+        class TorneoManager {
+	        -List~Observer~ observers
+	        -TorneoDAO torneoDAO
+	        -PartitaDAO partitaDAO
+	        -PrenotazioneDAO prenotazioneDAO
+	        -ImpiantiFasceDAO impiantiFasceDAO
+	        -FasciaOrariaDAO fasciaOrariaDAO
+	        -ImpiantoSportivoDAO impiantoDAO
+	        -SquadraDAO squadraDAO
+	        -PrenotazioneManager prenotazioneManager
+	        +TorneoManager(DaoFactory, PrenotazioneManager)
+	        -trovaEBookaSlot(Partita, LocalDate, Amministratore) void
+			+inserisciRisultato(int, int, int, Amministratore) void
+			+prenotaPartitaManuale(Partita, LocalDate, Amministratore) void
+			+validaGiocatoriUnivoci(List~Squadra~) void
+			+eliminaTorneoCompleto(int) void
+	        +creaTorneo(String, List~Squadra~, int) void
+	        +generaCalendario(Torneo, Amministratore) void
+	        -generaStrutturaAlbero(Torneo, int) List~Partita~
+			+addObserver(Observer) void
+	        +removeObserver(Observer) void
+	        +notifyObservers() void
+	        +getTuttiITornei() List~Torneo~
+	        +getTutteLeSquadre() List~Squadra~
+	        +getPartiteTorneo(int) List~Partita~
+	        +getTorneiDiUtente(int) List~Torneo~	       
+		}
+
+        class SquadraManager {
+	        -SquadraDAO squadraDAO
+	        -UtenteDAO utenteDAO
+	        -PrenotazioneManager prenotazioneManager
+	        +SquadraManager(DaoFactory, PrenotazioneManager)
+	        +creaSquadra(String, Cliente) void
+	        +aggiungiMembro(Squadra, String, Cliente) void
+	        +rimuoviMembro(Squadra, Cliente, Cliente) void
+	        +rimuoviSquadraAdmin(int) void
+        }
+
+	}
+
+    namespace DB{
+        class DatabaseManager {
+	        -DatabaseManager instance$
+	        -Connection connection
+	        -String URL
+	        -String USER
+	        -String PASSWORD
+	        -DatabaseManager()
+	        +getInstance() DatabaseManager$
+	        +getConnection() Connection
+        }
+    }
+
+	namespace DAOs {
+        class ImpiantoSportivoDAO {
+	        -Connection connection
+	        +ImpiantoSportivoDAO()
+	        +getTuttiImpianti() List~ImpiantoSportivo~
+	        +salvaImpiantoConFasce(ImpiantoSportivo, List) void
+        }
+
+        class FasciaOrariaDAO {
+	        -Connection connection
+	        +FasciaOrariaDAO()
+	        +getTutteFasceOrarie() List~FasciaOraria~
+        }
+
+        class ImpiantiFasceDAO {
+	        -Connection connection
+	        +ImpiantiFasceDAO()
+	        +getMappaDisponibilita() Map ~Integer, List ~Integer~ ~
+        }
+
+        class PartitaDAO {
+	        -Connection connection
+	        -SquadraDAO squadraDAO
+	        +PartitaDAO()
+	        +creaPartitaVuota(Partita) void
+	        +aggiornaSquadre(int, int, int) void
+	        +collegaPartitaSuccessiva(int, int, String) void
+	        +getPartiteByTorneo(int) List~Partita~
+	        +aggiornaRisultato(int, int, int) void
+	        +aggiornaConPrenotazione(int, int) void
+	        +getPartitaById(int) Partita
+	        +avanzaVincitore(int, int, String) void
+        }
+
+        class PrenotazioneDAO {
+	        -Connection connection
+	        +PrenotazioneDAO()
+	        +salvaPrenotazione(Prenotazione) void
+	        +getPrenotazioniByDate(LocalDate) List~Prenotazione~
+	        +getTutteLePrenotazioni() List~Prenotazione~
+	        +salvaPrenotazioneTorneo(Prenotazione) int
+	        +getTutteLePrenotazioniPerUtente(int) List~Prenotazione~
+	        +eliminaPrenotazioniPerSquadra(String) void
+	        +isUtenteOccupato(int,LocalDate,int) boolean
+	        +eliminaPrenotazioniDiTorneo(int) void
+        }
+
+        class SquadraDAO {
+	        -Connection connection
+	        -UtenteFactory utenteFactory
+	        +SquadraDAO()
+	        +getSquadraById(int) Squadra
+	        +getSquadreByUtente(int) List~Squadra~
+	        +getMembriBySquadra(int) List~Cliente~
+	        +getTutteLeSquadre() List~Squadra~
+	        +salvaSquadra(Squadra) void
+	        +aggiungiMembro(int, int) void
+	        +rimuoviMembro(int, int) void
+	        +eliminaSquadra(int) void
+	        +isUtenteMembro(int, int) boolean
+        }
+
+        class TorneoDAO {
+	        -Connection connection
+	        +TorneoDAO()
+	        +creaTorneo(Torneo, List~Squadra~, int) void
+	        +getTuttiITornei() List~Torneo~
+	        +getSquadreByTorneo(int) List~Squadra~
+	        +aggiornaStato(int, String) void
+	        +aggiornaVincitore(int,int) void
+	        +getTorneiPerUtente(int) List~Torneo~
+	        +eliminaTorneo(int) void
+	        +getTorneoById(int) Torneo
+        }
+
+        class UtenteDAO {
+	        -Connection connection
+	        -UtenteFactory utenteFactory
+	        +UtenteDAO()
+	        +validaLogin(String, String) Utente
+	        +salvaUtente(Utente) void
+	        +findUtenteByUsername(String) Utente
+        }
+
+	}
+
+	<<abstract>> Utente
+	<<interface>> StatoTorneo
+	<<interface>> PricingStrategy
+	<<interface>> Observer
+	<<interface>> Subject
+
+    Utente <|-- Cliente
+    Utente <|-- Amministratore
+    Squadra o-- Cliente : capitano/membri
+    Prenotazione --> Utente : creatore
+    Prenotazione --> ImpiantoSportivo
+    Prenotazione --> FasciaOraria
+    Prenotazione --> Cliente : giocatori
+    Torneo *-- Partita : tabellone
+    Torneo o-- Squadra : partecipanti
+    Partita --> Squadra : squadraCasa/Ospite
+    Partita --> Prenotazione
+    Partita --> Partita : partitaSuccessiva
+    Exception <|-- RegolaDiBusinessException
+    Exception <|-- UsernameGiaInUsoException
+    RuntimeException <|-- DataAccessException
+    RegolaDiBusinessException <|-- DatiConflittoException
+    RegolaDiBusinessException <|-- OperazioneFallitaException
+    RegolaDiBusinessException <|-- PermessoNegatoException
+    RegolaDiBusinessException <|-- RisorsaNonTrovataException
+    RegolaDiBusinessException <|-- SlotNonTrovatoException
+    StatoTorneo <|.. StatoBozza
+    StatoTorneo <|.. StatoAttivo
+    StatoTorneo <|.. StatoConcluso
+    Torneo --> StatoTorneo : statoCorrente
+    PricingStrategy <|.. StandardPricingStrategy
+    PricingStrategy <|.. WeekendPricingStrategy
+    PriceCalculator --> PricingStrategy
+    MainFrame *-- LoginView
+    MainFrame *-- RegistrazioneView
+    MainFrame *-- ClienteView
+    MainFrame *-- AdminView
+    App *-- AppController
+    AppController *-- ClienteController
+    AppController *-- AdminController
+    AppController *-- SquadraController
+    AppController *-- TorneoController
+    AppController --> MainFrame
+    Observer <|.. ClienteController
+    AdminController ..> AggiungiImpiantoDialog : uses
+    AdminController ..> TuttePrenotazioniDialog : uses
+    AdminController ..> GestioneSquadreAdminDialog : uses
+    ClienteController ..> PrenotazioneDialog : uses
+    ClienteController ..> StoricoPrenotazioniDialog : uses
+    ClienteController ..> SelezionaTorneoDialog : uses
+    ClienteController ..> VisualizzaTorneoDialog : uses
+    SquadraController ..> GestioneSquadreDialog : uses
+    TorneoController ..> CreaTorneoDialog : uses
+    TorneoController ..> GestioneTorneiDialog : uses
+    TorneoController ..> VisualizzaTorneoDialog : uses
+    AppController --> UserFacade
+    AppController --> PrenotazioneFacade
+    AppController --> TorneoFacade
+    AppController --> SquadraFacade
+    ClienteController --> PrenotazioneFacade
+    ClienteController --> TorneoFacade
+    AdminController --> PrenotazioneFacade
+    SquadraController --> SquadraFacade
+    SquadraController --> PrenotazioneFacade
+    TorneoController --> TorneoFacade
+    UserFacade --> UserManager
+    PrenotazioneFacade --> PrenotazioneManager
+    TorneoFacade --> TorneoManager
+    SquadraFacade --> SquadraManager
+    Subject <|.. PrenotazioneManager
+    Subject <|.. TorneoManager
+    PrenotazioneManager --> PriceCalculator
+    UserManager --> DaoFactory
+    PrenotazioneManager --> DaoFactory
+    TorneoManager --> DaoFactory
+    SquadraManager --> DaoFactory
+    UserManager --> UtenteDAO
+    PrenotazioneManager --> PrenotazioneDAO
+    PrenotazioneManager --> ImpiantoSportivoDAO
+    PrenotazioneManager --> FasciaOrariaDAO
+    PrenotazioneManager --> ImpiantiFasceDAO
+    PrenotazioneManager --> SquadraDAO
+    TorneoManager --> TorneoDAO
+    TorneoManager --> PartitaDAO
+    TorneoManager --> PrenotazioneDAO
+    TorneoManager --> ImpiantiFasceDAO
+    TorneoManager --> FasciaOrariaDAO
+    TorneoManager --> ImpiantoSportivoDAO
+    TorneoManager --> SquadraDAO
+    SquadraManager --> SquadraDAO
+    SquadraManager --> UtenteDAO
+    DaoFactory ..> DatabaseManager
+    UtenteDAO ..> DatabaseManager
+    PrenotazioneDAO ..> DatabaseManager
+    TorneoDAO ..> DatabaseManager
+    SquadraDAO ..> DatabaseManager
+    PartitaDAO ..> DatabaseManager
+    ImpiantoSportivoDAO ..> DatabaseManager
+    FasciaOrariaDAO ..> DatabaseManager
+    ImpiantiFasceDAO ..> DatabaseManager
+    UtenteDAO ..> UtenteFactory
+    SquadraDAO ..> UtenteFactory
+    PartitaDAO ..> SquadraDAO

@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "it.unipv.ingsfw.playfieldtech.app.App",
+            "projectName": "src_facade_11c29d6e"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "it.unipv.ingsfw.playfieldtech.app.App",
+            "projectName": "src_facade_d7d1fdfb"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "it.unipv.ingsfw.playfieldtech.app.App",
+            "projectName": "src_7a95fe"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "src_52770708"
+        },
+        {
+            "type": "java",
+            "name": "Avvia PlayFieldTechApp",
+            "request": "launch",
+            "mainClass": "it.unipv.ingsfw.playfieldtech.app.App",
+            "projectName": "${workspaceFolder}"
+        }
+    ]
+}

@@ -247,17 +247,13 @@ public class TorneoManager implements Subject {
     public void generaCalendario(Torneo torneo, Amministratore admin) 
             throws RegolaDiBusinessException {
         
-        // MODIFICA PER I TEST: Prendiamo le squadre già presenti nell'oggetto
-        List<Squadra> squadreAggiornate = torneo.getSquadrePartecipanti();
-        
-        // Se l'oggetto è vuoto (es. nell'uso reale), le andiamo a pescare dal DB
-        if (squadreAggiornate == null || squadreAggiornate.isEmpty()) {
-            try {
-                squadreAggiornate = torneoDAO.getSquadreByTorneo(torneo.getIdTorneo()); 
-                torneo.setSquadrePartecipanti(squadreAggiornate);
-            } catch (Exception e) {
-                throw new RegolaDiBusinessException("Errore recupero squadre per generazione calendario: " + e.getMessage());
-            }
+        // Prendiamo le squadre
+        List<Squadra> squadreAggiornate; 
+        try {
+            squadreAggiornate = torneoDAO.getSquadreByTorneo(torneo.getIdTorneo()); 
+            torneo.setSquadrePartecipanti(squadreAggiornate);
+        } catch (Exception e) {
+            throw new RegolaDiBusinessException("Errore recupero squadre per generazione calendario: " + e.getMessage());
         }
 
         // Generazione dell'Albero del Torneo (Delegata a metodo privato)
